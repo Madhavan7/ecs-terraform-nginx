@@ -107,5 +107,7 @@ jobs:
         run: terraform apply -auto-approve -input=false
       
       - name: Terraform Destroy
+        env:
+          TF_VAR_account_number: ${{secrets.TF_VAR_ACCOUNT_NUMBER}}
         if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
         run: terraform destroy -auto-approve 
