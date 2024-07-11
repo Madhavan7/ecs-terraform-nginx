@@ -41,6 +41,7 @@ resource "aws_ecs_task_definition" "nginx_task_definition"{
   }
 ])
 
+  execution_role_arn = "arn:aws:iam::${var.account_number}:role/ecsTaskExecutionRole"
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture        = "X86_64"
