@@ -53,6 +53,8 @@ jobs:
 
       - name: Terraform Plan
         id: plan
+        env: 
+          TF_VAR_account_number: $${{secrets.TF_VAR_ACCOUNT_NUMBER}}
         run: terraform plan -no-color
         if: github.event_name == 'pull_request'
         continue-on-error: true
@@ -99,6 +101,8 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
+        env:
+          TF_VAR_account_number: ${{secrets.TF_VAR_ACCOUNT_NUMBER}}
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
       
